@@ -1,0 +1,2 @@
+# MyStudyAI
+AI Study Assistant
