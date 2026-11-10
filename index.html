@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyStudyAI</title>
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #f3f4fa;
+  color: #242448;
+}
+header {
+  background: #292957;
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
+main {
+  max-width: 650px;
+  margin: auto;
+  padding: 15px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 15px;
+}
+textarea {
+  width: 100%;
+  height: 140px;
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+button {
+  background: #514bd8;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 13px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+#result {
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>📚 MyStudyAI</h1>
+<p>مساعدك الذكي في المذاكرة</p>
+</header>
+<main>
+<div class="card">
+<h2>✍️ اكتب محاضرتك</h2>
+<textarea id="notes" placeholder="اكتب نص المحاضرة هنا..."></textarea>
+<button onclick="summarize()">تلخيص المحاضرة</button>
+<button onclick="quiz()">إنشاء اختبار</button>
+</div>
+<div class="card">
+<h2>📖 النتيجة</h2>
+<div id="result">النتيجة هتظهر هنا</div>
+</div>
+</main>
+<script>
+function summarize() {
+let t = document.getElementById("notes").value.trim();
+if(!t) return alert("اكتب المحاضرة الأول");
+let s = t.split(/[.!؟\n]+/).filter(x=>x.trim());
+document.getElementById("result").textContent =
+"ملخص المحاضرة:\n" + s.slice(0,3).join("\n");
+}
+function quiz() {
+let t = document.getElementById("notes").value.trim();
+if(!t) return alert("اكتب المحاضرة الأول");
+let s = t.split(/[.!؟\n]+/).filter(x=>x.trim().length>10);
+document.getElementById("result").textContent =
+"أسئلة المراجعة:\n" +
+s.slice(0,5).map((x,i)=>(i+1)+"- اشرح: "+x).join("\n\n");
+}
+</script>
+</body>
+</html>
